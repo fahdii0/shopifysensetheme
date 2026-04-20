@@ -1,0 +1,69 @@
+{%- if product != blank -%}
+  <div class="sticky-mobile-buy-bar" id="StickyMobileBuyBar-{{ section_id }}" aria-hidden="true">
+    <div class="sticky-mobile-buy-bar__meta">
+      <span class="sticky-mobile-buy-bar__title">{{ product.title | escape }}</span>
+      <span class="sticky-mobile-buy-bar__price">
+        {{ product.selected_or_first_available_variant.price | money_with_currency }}
+      </span>
+    </div>
+    <button
+      type="button"
+      class="button sticky-mobile-buy-bar__button"
+      id="StickyMobileBuyButton-{{ section_id }}"
+    >
+      {{ 'products.product.add_to_cart' | t }}
+    </button>
+  </div>
+
+  <script>
+    (() => {
+      const sectionId = '{{ section_id }}';
+      const root = document.getElementById(`MainProduct-${sectionId}`);
+      const bar = document.getElementById(`StickyMobileBuyBar-${sectionId}`);
+      const stickyButton = document.getElementById(`StickyMobileBuyButton-${sectionId}`);
+      const productSubmit = document.getElementById(`ProductSubmitButton-${sectionId}`);
+
+      if (!root || !bar || !stickyButton || !productSubmit) return;
+
+      const mobileMq = window.matchMedia('(max-width: 989px)');
+
+      const syncButtonState = () => {
+        const submitText = productSubmit.querySelector('span');
+        const stickyLabel = submitText && submitText.textContent ? submitText.textContent.trim() : '';
+
+        stickyButton.disabled = productSubmit.disabled;
+        if (stickyLabel.length) stickyButton.textContent = stickyLabel;
+      };
+
+      const updateVisibility = () => {
+        if (!mobileMq.matches) {
+          bar.classList.remove('is-visible');
+          return;
+        }
+
+        const sectionRect = root.getBoundingClientRect();
+        const shouldShow = sectionRect.bottom < window.innerHeight * 0.2;
+        bar.classList.toggle('is-visible', shouldShow);
+        bar.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
+      };
+
+      stickyButton.addEventListener('click', () => {
+        if (productSubmit.disabled) return;
+        productSubmit.click();
+      });
+
+      productSubmit.addEventListener('click', syncButtonState);
+      document.addEventListener('change', (event) => {
+        if (event.target.closest(`#MainProduct-${sectionId}`)) {
+          window.requestAnimationFrame(syncButtonState);
+        }
+      });
+
+      window.addEventListener('scroll', updateVisibility, { passive: true });
+      window.addEventListener('resize', updateVisibility);
+
+      syncButtonState();
+      updateVisibility();
+    })();
+  </script>
+{%- endif -%}
