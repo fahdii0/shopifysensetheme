@@ -383,12 +383,24 @@
 @media screen and (min-width: 990px) {
   .card .media.media--hover-effect > img:only-child,
   .card-wrapper .media.media--hover-effect > img:only-child {
-    transition: transform var(--duration-long) ease;
+    transition: transform var(--duration-long) cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .card:hover .media.media--hover-effect > img:first-child:only-child,
   .card-wrapper:hover .media.media--hover-effect > img:first-child:only-child {
     transform: scale(1.03);
+  }
+
+  .card .media.media--hover-effect > img,
+  .card-wrapper .media.media--hover-effect > img {
+    transition:
+      opacity var(--duration-long) cubic-bezier(0.4, 0, 0.2, 1),
+      transform var(--duration-long) cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card .media.media--hover-effect > img + img,
+  .card-wrapper .media.media--hover-effect > img + img {
+    opacity: 0;
   }
 
   .card-wrapper:hover .media.media--hover-effect > img:first-child:not(:only-child) {
@@ -397,7 +409,7 @@
 
   .card-wrapper:hover .media.media--hover-effect > img + img {
     opacity: 1;
-    transition: transform var(--duration-long) ease;
+    transition: transform var(--duration-long) cubic-bezier(0.4, 0, 0.2, 1);
     transform: scale(1.03);
   }
 

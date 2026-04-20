@@ -26,7 +26,11 @@
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
-  transition: transform var(--duration-default) ease;
+  background: linear-gradient(160deg, rgba(255, 246, 249, 0.82), rgba(255, 255, 255, 0.7));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: -16px 0 40px rgba(128, 0, 32, 0.18);
+  transition: transform var(--duration-default) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .drawer__inner-empty {
@@ -74,6 +78,11 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.drawer__header,
+.drawer__footer {
+  background: linear-gradient(180deg, rgba(255, 246, 249, 0.5), rgba(255, 255, 255, 0));
 }
 
 .drawer__heading {
@@ -153,6 +162,7 @@ cart-drawer {
   right: 0;
   bottom: 0;
   left: 0;
+  background: linear-gradient(180deg, rgba(128, 0, 32, 0.42), rgba(128, 0, 32, 0.28));
 }
 
 .cart-drawer__overlay:empty {
@@ -254,6 +264,61 @@ cart-drawer-items {
 .cart-drawer .cart-item .loading__spinner {
   right: 5px;
   padding-top: 2.5rem;
+}
+
+.cart-drawer__footer .free-shipping-progress {
+  position: relative;
+  overflow: hidden;
+  padding: 1.1rem 1.1rem 1rem;
+  border-radius: 15px;
+  background: linear-gradient(135deg, rgba(255, 246, 249, 0.9), rgba(219, 112, 147, 0.14));
+  border: 1px solid rgba(128, 0, 32, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.cart-drawer__footer .free-shipping-progress::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 42%, rgba(255, 255, 255, 0.42) 50%, transparent 58%);
+  animation: glossy-progress-sweep 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+.cart-drawer__footer .free-shipping-progress__track {
+  position: relative;
+}
+
+.cart-drawer__footer .free-shipping-progress__value {
+  position: relative;
+  overflow: hidden;
+}
+
+.cart-drawer__footer .free-shipping-progress__value::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  animation: glossy-progress-glint 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes glossy-progress-sweep {
+  0%,
+  65% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes glossy-progress-glint {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
 }
 
 .cart-drawer .cart-items td {

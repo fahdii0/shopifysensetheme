@@ -42,7 +42,7 @@
         }
 
         const sectionRect = root.getBoundingClientRect();
-        const shouldShow = sectionRect.bottom < window.innerHeight * 0.2;
+        const shouldShow = sectionRect.bottom < window.innerHeight * 0.22;
         bar.classList.toggle('is-visible', shouldShow);
         bar.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
       };

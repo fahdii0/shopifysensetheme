@@ -19,6 +19,20 @@ product-info {
   padding-left: 0;
 }
 
+.product__media-list .media img {
+  transform-origin: center center;
+  animation: kenburns-product-media 24s var(--luxury-ease, cubic-bezier(0.4, 0, 0.2, 1)) infinite alternate;
+}
+
+@keyframes kenburns-product-media {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.08) translate3d(-1.2%, -1%, 0);
+  }
+}
+
 @media screen and (min-width: 750px) {
   .product__column-sticky {
     display: block;
@@ -384,6 +398,10 @@ a.product__text {
 .product__media-list video {
   border-radius: calc(var(--media-radius) - var(--media-border-width));
 }
+
+  .product__media-list .media {
+    overflow: hidden;
+  }
 
 @media screen and (max-width: 749px) {
   .product__media-list {
