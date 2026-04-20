@@ -1,0 +1,78 @@
+{% style %}
+  .section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_desktop }}px;
+      padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    }
+  }
+{% endstyle %}
+
+<section class="velvet-section section-{{ section.id }}">
+  <div class="page-width velvet-reveal">
+    <div class="velvet-hero">
+      <div class="velvet-hero__media">
+        {% if section.settings.image != blank %}
+          {{
+            section.settings.image
+            | image_url: width: 2200
+            | image_tag:
+              widths: '700, 900, 1200, 1600, 2200',
+              sizes: '(max-width: 749px) 100vw, 1200px',
+              loading: 'lazy',
+              alt: section.settings.heading
+          }}
+        {% elsif section.settings.mobile_image != blank %}
+          {{
+            section.settings.mobile_image
+            | image_url: width: 1400
+            | image_tag:
+              widths: '500, 700, 900, 1200',
+              sizes: '100vw',
+              loading: 'lazy',
+              alt: section.settings.heading
+          }}
+        {% endif %}
+      </div>
+      <div class="velvet-hero__overlay"></div>
+      <div class="velvet-hero__content velvet-float">
+        {% if section.settings.eyebrow != blank %}
+          <p class="velvet-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        {% if section.settings.heading != blank %}
+          <h1 class="h0">{{ section.settings.heading }}</h1>
+        {% endif %}
+        {% if section.settings.subheading != blank %}
+          <p class="h4">{{ section.settings.subheading }}</p>
+        {% endif %}
+        {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+          <a href="{{ section.settings.button_link }}" class="velvet-btn">{{ section.settings.button_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Velvet Hero Banner",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Velvet Makeup Collection" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Glow with velvet confidence" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Luxury makeup kits curated for everyday glam and special moments." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Now" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "image_picker", "id": "image", "label": "Desktop image" },
+    { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Mobile top padding", "default": 32 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Mobile bottom padding", "default": 32 },
+    { "type": "range", "id": "padding_top_desktop", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "Desktop top padding", "default": 56 },
+    { "type": "range", "id": "padding_bottom_desktop", "min": 0, "max": 200, "step": 4, "unit": "px", "label": "Desktop bottom padding", "default": 56 }
+  ],
+  "presets": [{ "name": "Velvet Hero Banner" }]
+}
+{% endschema %}

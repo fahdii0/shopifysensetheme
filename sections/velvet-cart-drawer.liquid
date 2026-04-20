@@ -1,0 +1,18 @@
+<div class="velvet-toast" data-velvet-toast>{{ section.settings.success_message }}</div>
+
+<script>
+  window.velvetStrings = {
+    added: {{ section.settings.success_message | json }},
+    error: {{ section.settings.error_message | json }}
+  };
+</script>
+
+{% schema %}
+{
+  "name": "Velvet Cart Drawer Helper",
+  "settings": [
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Added to cart successfully" },
+    { "type": "text", "id": "error_message", "label": "Error message", "default": "Unable to add this product" }
+  ]
+}
+{% endschema %}

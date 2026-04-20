@@ -1,0 +1,133 @@
+{% liquid
+  assign source_collection = collections[section.settings.collection]
+  assign products_to_show = section.settings.products_to_show
+%}
+
+<section class="velvet-section section-{{ section.id }}">
+  <div class="page-width velvet-reveal">
+    {% if section.settings.heading != blank %}
+      <div class="title-wrapper-with-link">
+        <h2 class="h1">{{ section.settings.heading }}</h2>
+      </div>
+    {% endif %}
+
+    <div class="velvet-grid">
+      {% if source_collection != blank %}
+        {% for product in source_collection.products limit: products_to_show %}
+          {%- liquid
+            assign chosen_variant = product.selected_or_first_available_variant
+            assign color_option = blank
+            for option in product.options_with_values
+              assign option_name = option.name | downcase
+              if option_name contains 'color' or option_name contains 'colour'
+                assign color_option = option
+              endif
+            endfor
+          -%}
+          <article class="velvet-card">
+            <a href="{{ product.url }}" class="velvet-card__media">
+              {% if product.compare_at_price_max > product.price %}
+                <span class="velvet-badge">Sale</span>
+              {% endif %}
+              {% if product.featured_image != blank %}
+                {{
+                  product.featured_image
+                  | image_url: width: 900
+                  | image_tag:
+                    widths: '300, 450, 650, 900',
+                    sizes: '(max-width: 989px) 50vw, 25vw',
+                    class: 'primary',
+                    loading: 'lazy',
+                    alt: product.title
+                }}
+              {% endif %}
+              {% if product.images[1] != blank %}
+                {{
+                  product.images[1]
+                  | image_url: width: 900
+                  | image_tag:
+                    widths: '300, 450, 650, 900',
+                    sizes: '(max-width: 989px) 50vw, 25vw',
+                    class: 'secondary',
+                    loading: 'lazy',
+                    alt: product.title
+                }}
+              {% elsif product.featured_image != blank %}
+                {{
+                  product.featured_image
+                  | image_url: width: 900
+                  | image_tag:
+                    widths: '300, 450, 650, 900',
+                    sizes: '(max-width: 989px) 50vw, 25vw',
+                    class: 'secondary',
+                    loading: 'lazy',
+                    alt: product.title
+                }}
+              {% endif %}
+            </a>
+
+            <form class="js-velvet-add-form velvet-quick-add" method="post" action="{{ routes.cart_add_url }}">
+              <input type="hidden" name="id" value="{{ chosen_variant.id }}">
+              <button type="submit" class="velvet-btn" {% unless chosen_variant.available %}disabled{% endunless %}>
+                {% if chosen_variant.available %}
+                  {{ 'products.product.add_to_cart' | t }}
+                {% else %}
+                  {{ 'products.product.sold_out' | t }}
+                {% endif %}
+              </button>
+            </form>
+
+            <div class="velvet-card__content">
+              <h3 class="h4"><a href="{{ product.url }}" class="full-unstyled-link">{{ product.title }}</a></h3>
+              <p class="velvet-price">{{ product.price | money }}</p>
+
+              {% if color_option != blank %}
+                <div class="velvet-swatches">
+                  {% for value in color_option.values limit: 5 %}
+                    <span
+                      class="velvet-swatch"
+                      style="background: {{ value | downcase }};"
+                      title="{{ value | escape }}"
+                    ></span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              <div class="velvet-stars" aria-hidden="true">★★★★★</div>
+            </div>
+          </article>
+        {% endfor %}
+      {% else %}
+        {% for i in (1..4) %}
+          <article class="velvet-card">
+            <div class="velvet-card__media">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+            <div class="velvet-card__content">
+              <h3 class="h4">Sample Product {{ i }}</h3>
+              <p class="velvet-price">{{ 1999 | money }}</p>
+            </div>
+          </article>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    {% if source_collection != blank and section.settings.show_view_all %}
+      <div class="velvet-grid__footer">
+        <a href="{{ source_collection.url }}" class="velvet-btn">{{ section.settings.view_all_label }}</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Velvet Product Grid",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Best Selling Velvet Kits" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "min": 4, "max": 16, "step": 1, "label": "Products to show", "default": 8 },
+    { "type": "checkbox", "id": "show_view_all", "label": "Show View All button", "default": true },
+    { "type": "text", "id": "view_all_label", "label": "View all label", "default": "View All" }
+  ],
+  "presets": [{ "name": "Velvet Product Grid" }]
+}
+{% endschema %}

@@ -1,0 +1,54 @@
+<section
+  class="velvet-newsletter-popup"
+  data-velvet-newsletter-popup
+  data-delay="{{ section.settings.delay_ms }}"
+  data-storage-key="velvet_popup_{{ section.id }}"
+>
+  <div class="velvet-newsletter-popup__panel velvet-reveal">
+    <button type="button" class="velvet-newsletter-popup__close" data-velvet-popup-close aria-label="Close">&times;</button>
+
+    {% if section.settings.heading != blank %}
+      <h2 class="h2">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.text != blank %}
+      <p>{{ section.settings.text }}</p>
+    {% endif %}
+
+    {%- form 'customer', id: 'VelvetPopupNewsletter-' | append: section.id -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="field">
+        <input
+          id="VelvetNewsletterEmail-{{ section.id }}"
+          type="email"
+          name="contact[email]"
+          class="field__input"
+          value="{{ form.email }}"
+          placeholder="{{ section.settings.email_placeholder }}"
+          required
+        >
+        <label class="field__label" for="VelvetNewsletterEmail-{{ section.id }}">{{ section.settings.email_placeholder }}</label>
+      </div>
+      <div style="margin-top: 1.2rem;">
+        <button class="velvet-btn" type="submit">{{ section.settings.button_label }}</button>
+      </div>
+      {%- if form.posted_successfully? -%}
+        <p style="margin-top: 1rem; color: rgb(var(--velvet-deep));">{{ section.settings.success_text }}</p>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Velvet Newsletter Popup",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Get 10% Off Your First Order" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Join our beauty list for new drops, exclusive offers, and makeup tips." },
+    { "type": "text", "id": "email_placeholder", "label": "Email placeholder", "default": "Email address" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Subscribe" },
+    { "type": "text", "id": "success_text", "label": "Success text", "default": "Thank you for subscribing." },
+    { "type": "range", "id": "delay_ms", "label": "Popup delay (milliseconds)", "min": 1000, "max": 15000, "step": 500, "default": 5000 }
+  ],
+  "presets": [{ "name": "Velvet Newsletter Popup" }]
+}
+{% endschema %}
