@@ -28,6 +28,19 @@
 {%- endstyle -%}
 
 <footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="footer__luxury-panel page-width">
+    <div class="footer__luxury-copy-wrap">
+      <p class="footer__eyebrow">Velvet &amp; Pink boutique</p>
+      <h2 class="footer__luxury-title">A polished beauty destination for curated makeup kits.</h2>
+      <p class="footer__luxury-text">Discover glow-focused essentials, gift-ready sets, and a premium shopping experience that feels as elevated as your products.</p>
+    </div>
+    <div class="footer__luxury-badges" aria-hidden="true">
+      <span class="footer__luxury-badge">Glossy finish</span>
+      <span class="footer__luxury-badge">Curated kits</span>
+      <span class="footer__luxury-badge">Premium support</span>
+    </div>
+  </div>
+
   {%- liquid
     assign has_social_icons = true
     if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank

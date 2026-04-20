@@ -115,6 +115,11 @@
 %}
 
 <{{ header_tag }} {% if header_tag == 'sticky-header' %}data-sticky-type="{{ section.settings.sticky_header_type }}"{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+  <div class="header__luxury-strip page-width" aria-hidden="true">
+    <span class="header__luxury-pill">Velvet Boutique</span>
+    <span class="header__luxury-copy">Soft glam makeup kits with a glossy premium finish</span>
+    <span class="header__luxury-pill header__luxury-pill--accent">Free premium shipping over threshold</span>
+  </div>
   {%- liquid
     assign social_links = false
     assign localization_forms = false
