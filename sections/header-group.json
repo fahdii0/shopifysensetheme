@@ -38,9 +38,9 @@
     "header": {
       "type": "header",
       "custom_css": [
-        "/* Stronger version - overrides everything */header,{background-color: #FDF2F2 !important;}",
-        "header *,{color: #000000 !important;}",
-        "/* Keep buttons normal if they exist */header button,.header-wrapper button {color: inherit !important;}"
+        "/* Stronger version - overrides everything */header {background-color: #fdf2f2 !important;}",
+        "header * {color: #000000 !important;}",
+        " /* Keep buttons normal if they exist */header button,.header-wrapper button {color: inherit !important;}"
       ],
       "settings": {
         "logo_position": "top-center",
@@ -55,8 +55,8 @@
         "enable_language_selector": true,
         "enable_customer_avatar": true,
         "margin_bottom": 28,
-        "padding_top": 12,
-        "padding_bottom": 4
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     }
   },
