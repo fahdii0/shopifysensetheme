@@ -79,7 +79,7 @@
         "image_zoom": "lightbox",
         "hide_variants": false,
         "enable_video_looping": false,
-        "kit_item_1": "{{ product.metafields.custom.boxitem2.value }}EYESHADOW PALETTE",
+        "kit_item_1": "{{ product.metafields.custom.eyeshadow_palette.value }}MAKEUP FIXER",
         "kit_icon_1": "bottle",
         "kit_item_2": "Makeup Base Primer",
         "kit_icon_2": "perfume",
