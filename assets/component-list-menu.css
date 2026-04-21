@@ -4,9 +4,18 @@
 
 .list-menu--disclosure {
   position: absolute;
-  min-width: 100%;
-  width: 20rem;
+  min-width: auto;
+  width: 100%;
+  max-width: 20rem;
   border: 1px solid rgba(var(--color-foreground), 0.2);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@media screen and (min-width: 750px) {
+  .list-menu--disclosure {
+    width: 20rem;
+  }
 }
 
 .list-menu--disclosure:focus {
@@ -24,7 +33,14 @@
 
 .list-menu--disclosure.localization-selector {
   max-height: 18rem;
-  overflow: auto;
-  width: 10rem;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 10rem;
   padding: 0.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .list-menu--disclosure.localization-selector {
+    width: 10rem;
+  }
 }

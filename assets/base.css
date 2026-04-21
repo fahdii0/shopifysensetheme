@@ -1,3 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 :root {
   --alpha-button-background: 1;
   --alpha-button-border: 1;
