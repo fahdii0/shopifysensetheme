@@ -37,7 +37,11 @@
     },
     "header": {
       "type": "header",
-      "custom_css": [],
+      "custom_css": [
+        "/* Stronger version - overrides everything */header,{background-color: #FDF2F2 !important;}",
+        "header *,{color: #000000 !important;}",
+        "/* Keep buttons normal if they exist */header button,.header-wrapper button {color: inherit !important;}"
+      ],
       "settings": {
         "logo_position": "top-center",
         "mobile_logo_position": "center",
@@ -46,7 +50,7 @@
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": false,
         "color_scheme": "scheme-2",
-        "menu_color_scheme": "scheme-3",
+        "menu_color_scheme": "scheme-1",
         "enable_country_selector": true,
         "enable_language_selector": true,
         "enable_customer_avatar": true,
