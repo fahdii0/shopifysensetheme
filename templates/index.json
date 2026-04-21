@@ -33,6 +33,7 @@
         "button"
       ],
       "settings": {
+        "image": "shopify://shop_images/1000440047.jpg",
         "height": "medium",
         "desktop_image_width": "large",
         "layout": "text_first",
