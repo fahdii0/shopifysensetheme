@@ -38,16 +38,18 @@
     "header": {
       "type": "header",
       "custom_css": [
-        "/* Stronger version - overrides everything */header {background-color: #fdf2f2 !important;}",
+        "header {background-color: #fdf2f2 !important; position: relative !important; z-index: 100 !important;}",
         "header * {color: #000000 !important;}",
-        " /* Keep buttons normal if they exist */header button,.header-wrapper button {color: inherit !important;}"
+        "/* Make header sticky/fixed if needed */header {position: sticky !important; top: 0 !important; z-index: 999 !important;}",
+        "/* Keep buttons normal if they exist */header button,.header-wrapper button {color: inherit !important;}",
+        "/* Optional: Ensure dropdown menus appear above content */header nav,header .menu,header .dropdown {z-index: 1000 !important; position: relative !important;}"
       ],
       "settings": {
         "logo_position": "top-center",
         "mobile_logo_position": "center",
         "menu": "main-menu",
         "menu_type_desktop": "drawer",
-        "sticky_header_type": "none",
+        "sticky_header_type": "on-scroll-up",
         "show_line_separator": false,
         "color_scheme": "scheme-2",
         "menu_color_scheme": "scheme-1",
