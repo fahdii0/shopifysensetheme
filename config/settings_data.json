@@ -413,7 +413,8 @@
   "platform_customizations": {
     "custom_css": [
       "/* Mobile specific fixes */@media screen and (max-width: 749px) {body {overflow-x: hidden; } .header-wrapper, header, .menu-drawer {max-width: 100vw; }}",
-      " /* Desktop optimization (adjust if needed) */@media screen and (min-width: 750px) {/* Default desktop styles usually work, but you can add specific tweaks here */}"
+      " /* Desktop optimization (adjust if needed) */@media screen and (min-width: 750px) {/* Default desktop styles usually work, but you can add specific tweaks here */}",
+      ".product-form__submit {background-color: lightpink !important; color: white !important;}"
     ]
   }
 }
