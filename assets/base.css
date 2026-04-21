@@ -3729,31 +3729,38 @@ h5 {
   box-shadow: 0 8px 28px rgba(128, 0, 32, 0.12);
 }
 
-/* Transparent homepage header overlay */
-body.template-index .shopify-section-group-header-group {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 30;
+/* Transparent homepage header overlay (desktop only) */
+@media screen and (min-width: 990px) {
+  body.template-index .shopify-section-group-header-group {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 30;
+  }
+
+  body.template-index .shopify-section-group-header-group .header-wrapper,
+  body.template-index .shopify-section-group-header-group .utility-bar {
+    background: linear-gradient(180deg, rgba(20, 2, 10, 0.44), rgba(20, 2, 10, 0.08));
+    border-bottom-color: rgba(255, 255, 255, 0.18);
+    box-shadow: none;
+  }
+
+  body.template-index .header__heading-link,
+  body.template-index .header__menu-item,
+  body.template-index .header__icon,
+  body.template-index .announcement-bar__message {
+    color: #fff;
+  }
 }
 
-body.template-index .shopify-section-group-header-group .header-wrapper,
-body.template-index .shopify-section-group-header-group .utility-bar {
-  background: linear-gradient(180deg, rgba(20, 2, 10, 0.44), rgba(20, 2, 10, 0.08));
-  border-bottom-color: rgba(255, 255, 255, 0.18);
-  box-shadow: none;
-}
-
-body.template-index .header__heading-link,
-body.template-index .header__menu-item,
-body.template-index .header__icon,
-body.template-index .announcement-bar__message {
-  color: #fff;
-}
-
-/* Global section scroll reveal */
+/* Global section scroll reveal (progressive enhancement fallback) */
 .velvet-reveal {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.reveal-ready .velvet-reveal {
   opacity: 0;
   transform: translate3d(0, 28px, 0);
   transition:
@@ -3762,7 +3769,7 @@ body.template-index .announcement-bar__message {
   transition-delay: calc(var(--velvet-reveal-order, 0) * 22ms);
 }
 
-.velvet-reveal.is-visible {
+.reveal-ready .velvet-reveal.is-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }

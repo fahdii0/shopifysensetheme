@@ -1,4 +1,6 @@
 (() => {
+  document.documentElement.classList.add('reveal-ready');
+
   const SECTION_SELECTOR = '#MainContent > .shopify-section';
   const REVEAL_CLASS = 'velvet-reveal';
   const VISIBLE_CLASS = 'is-visible';

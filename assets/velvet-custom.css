@@ -26,12 +26,17 @@
 }
 
 .velvet-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-ready .velvet-reveal {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.5s var(--velvet-ease), transform 0.5s var(--velvet-ease);
 }
 
-.velvet-reveal.is-visible {
+.reveal-ready .velvet-reveal.is-visible {
   opacity: 1;
   transform: none;
 }
