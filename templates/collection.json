@@ -22,7 +22,7 @@
       "settings": {
         "products_per_page": 20,
         "columns_desktop": 4,
-        "columns_mobile": "2",
+        "columns_mobile": "1",
         "color_scheme": "scheme-1",
         "image_ratio": "square",
         "image_shape": "default",
@@ -31,10 +31,10 @@
         "show_rating": false,
         "quick_add": "none",
         "enable_filtering": true,
-        "filter_type": "horizontal",
+        "filter_type": "drawer",
         "enable_sorting": true,
         "padding_top": 0,
-        "padding_bottom": 68
+        "padding_bottom": 52
       }
     }
   },
